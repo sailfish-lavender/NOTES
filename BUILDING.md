@@ -25,7 +25,10 @@ Building for target armv7hl-meego-linux
 
 To fix this, we need to build libncicore:
 ```
-PlatformSDK [danct12@melttower hadk]$ rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/libncicore.git
+PlatformSDK $ rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/libncicore.git
+PlatformSDK $ rpm/dhd/helpers/build_packages.sh --mw=https://git.sailfishos.org/mer-core/nfcd.git
+PlatformSDK $ rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/libnciplugin.git
+PlatformSDK $ rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/nfcd-binder-plugin.git
 ```
 
 After that, it should build just fine.
