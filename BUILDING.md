@@ -29,6 +29,9 @@ PlatformSDK $ rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybr
 PlatformSDK $ rpm/dhd/helpers/build_packages.sh --mw=https://git.sailfishos.org/mer-core/nfcd.git
 PlatformSDK $ rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/libnciplugin.git
 PlatformSDK $ rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/nfcd-binder-plugin.git
+PlatformSDK $ sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -m sdk-install -R zypper in "ssu-kickstart-configuration"
+PlatformSDK $ rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos/repomd-pattern-builder
+PlatformSDK $ sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -m sdk-install -R zypper in "qt5-qttools-kmap2qmap"
 ```
 
 After that, it should build just fine.
