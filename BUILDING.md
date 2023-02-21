@@ -11,19 +11,7 @@ hybris-patches/apply-patches.sh --mb
 The last line patches the trees so that they can compile via HADK.
 
 ## Build errors
-### No provider of 'pkgconfig(libnciplugin)'
-```
-No provider of 'pkgconfig(libnciplugin)' found.
-Setting version: 1.1.1
-error: Failed build dependencies:
-        pkgconfig(libncicore) is needed by nfcd-binder-plugin-1.1.1-0.armv7hl
-        pkgconfig(libnciplugin) is needed by nfcd-binder-plugin-1.1.1-0.armv7hl
-        pkgconfig(nfcd-plugin) >= 1.0.20 is needed by nfcd-binder-plugin-1.1.1-0.armv7hl
-Building target platforms: armv7hl-meego-linux
-Building for target armv7hl-meego-linux
-```
-
-To fix this, we need to build libncicore:
+A few missing dependencies might pop up which can be fixed by installing them if needed. Don't run then all at once.
 ```
 PlatformSDK $ rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/libncicore.git
 PlatformSDK $ rpm/dhd/helpers/build_packages.sh --mw=https://git.sailfishos.org/mer-core/nfcd.git
@@ -32,7 +20,7 @@ PlatformSDK $ rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybr
 PlatformSDK $ sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -m sdk-install -R zypper in "ssu-kickstart-configuration"
 PlatformSDK $ rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos/repomd-pattern-builder
 PlatformSDK $ sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -m sdk-install -R zypper in "qt5-qttools-kmap2qmap"
-PlatformSDK $ rpm/dhd/helpers/build_packages.sh --droid-hal
+PlatformSDK $ sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -msdk-install -R zypper in ccache
 ```
 
 After that, it should build just fine.
