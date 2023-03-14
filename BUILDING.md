@@ -1,12 +1,11 @@
-# Building SailfishOS for Note 7
+# Building SailfishOS 4.5 for Note 7
 
 ## Build errors
-Befor building anything with build_package make sure to run
+Before building anything with build_package make sure to run
 ```
 PlatformSDK $ sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -msdk-install -R zypper in ccache
 PlatformSDK $ sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -m sdk-install -R zypper -n rm bluez5-configs-mer
 ```
-To install ccache in target
 
 To build --version the following are needed
 ```
