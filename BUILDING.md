@@ -1,26 +1,19 @@
 # Building SailfishOS for Note 7
 
-## Clone/Patch the trees
-Before building hybris-hal, we have to run this as libhybris isn't cloned:
-```
-cd $ANDROID_ROOT/external
-git clone --recurse-submodules https://github.com/mer-hybris/libhybris.git
-cd $ANDROID_ROOT
-hybris-patches/apply-patches.sh --mb
-```
-The last line patches the trees so that they can compile via HADK.
-
 ## Build errors
-A few missing dependencies might pop up which can be fixed by installing them if needed. Don't run then all at once.
+Befor building anything with build_package make sure to run
 ```
-PlatformSDK $ rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/libncicore.git
-PlatformSDK $ rpm/dhd/helpers/build_packages.sh --mw=https://git.sailfishos.org/mer-core/nfcd.git
-PlatformSDK $ rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/libnciplugin.git
-PlatformSDK $ rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/nfcd-binder-plugin.git
-PlatformSDK $ sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -m sdk-install -R zypper in "ssu-kickstart-configuration"
-PlatformSDK $ rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos/repomd-pattern-builder
-PlatformSDK $ sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -m sdk-install -R zypper in "qt5-qttools-kmap2qmap"
 PlatformSDK $ sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -msdk-install -R zypper in ccache
+PlatformSDK $ sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -m sdk-install -R zypper -n rm bluez5-configs-mer
+```
+To install ccache in target
+
+To build --version the following are needed
+```
+PlatformSDK $ sdk-assistant maintain $VENDOR-$DEVICE-$PORT_ARCH zypper -n --plus-repo $ANDROID_ROOT/droid-local-repo/lavender/ install --allow-unsigned-rpm droid-hal-lavender droid-hal-lavender-kernel
+PlatformSDK $ sdk-assistant maintain $VENDOR-$DEVICE-$PORT_ARCH zypper -n --plus-repo $ANDROID_ROOT/droid-local-repo/$DEVICE install --allow-unsigned-rpm hybris-libsensorfw-qt5 mce-plugin-libhybris ngfd-plugin-native-vibrator pulseaudio-modules-droid qtscenegraph-adaptation
+PlatformSDK $ sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -R -m sdk-install zypper in droid-config-$DEVICE -ofono-configs-binder
+PlatformSDK $ sdk-assistant maintain $VENDOR-$DEVICE-$PORT_ARCH zypper -n --plus-repo $ANDROID_ROOT/droid-local-repo/$DEVICE install --allow-unsigned-rpm droid-config droid-config-preinit-plugins droid-config-pulseaudio-settings droid-config-sailfish qt5-qpa-hwcomposer-plugin
 ```
 
 After that, it should build just fine.
