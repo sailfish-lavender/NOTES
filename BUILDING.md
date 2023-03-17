@@ -1,4 +1,4 @@
-# Building SailfishOS 4.5 for Note 7
+# Building SailfishOS 4.5 for Redmi Note 7
 
 ## Build errors
 Before building anything with build_package make sure to run
